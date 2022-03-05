@@ -1,5 +1,5 @@
 {
-  "name": "tweets",
+  "name": "tweets-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

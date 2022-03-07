@@ -1,5 +1,5 @@
 const tweets = new Set();
-const users = new Map();
+const tweets = new Map();
 
 class Connection {
   constructor(io, socket) {
@@ -18,7 +18,7 @@ class Connection {
   }
 
   disconnect() {
-    users.delete(this.socket);
+    tweets.delete(this.socket);
   }
 }
 

@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { TwitterTweetEmbed } from "react-twitter-embed";
+import { connect } from "react-redux";
+import { loadTweets } from "././redux-saga/actions";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  componentDidMount() {
+    this.props.loadTweets({});
+  }
+
+  render() {
+    if (this.props.loading) {
+      return <div>Loading</div>;
+    }
+
+    if (this.props.error) {
+      return <div style={{ color: "red" }}>ERROR: {this.props.error}</div>;
+    }
+
+    return (
+      <>
+        {/* {this.props.data.map((tweet) => (
+          <TwitterTweetEmbed tweetId={tweet.data.id} />
+        ))} */}
+      </>
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  // data: state.reduxSaga.data,
+  // loading: state.reduxSaga.loading,
+  // error: state.reduxSaga.error,
+});
+
+const mapDispatchToProps = {
+  loadTweets,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

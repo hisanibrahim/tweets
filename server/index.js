@@ -8,6 +8,7 @@ require("dotenv").config();
 const token = process.env.BEARER_TOKEN;
 const rulesURL = "https://api.twitter.com/2/tweets/search/stream/rules";
 const streamURL = "https://api.twitter.com/2/tweets/search/stream";
+const recentURL = "https://api.twitter.com/2/tweets/search/recent";
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -149,7 +150,14 @@ module.exports = {
 
 app.get("/api/tweets", async (req, res) => {
   try {
-    res.send(tweets);
+    const response = needle.get(streamURL, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        timeout: 20000,
+        
+      });
+    res.send(response);
   } catch (e) {
     res.send(e);
   }

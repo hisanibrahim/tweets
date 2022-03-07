@@ -1,59 +1,31 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-// const socketIo = require("socket.io");
 const http = require("http");
 const cors = require("cors");
+const axios = require("axios");
 require("dotenv").config();
 
-const { startStream } = require("./stream");
-// const tweets = require("../tweets");
+const token = process.env.BEARER_TOKEN;
+const recentURL = "https://api.twitter.com/2/tweets/search/recent";
 
 const app = express();
-let port = process.env.PORT || 4000;
+const port = process.env.PORT || 4000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 const server = http.createServer(app);
-// const io = socketIo(server, {
-//   cors: {
-//     origin: "*",
-//     methods: ["GET", "POST"],
-//   },
-// });
-
-// let timeout = 0;
-
-// const errorMessage = {
-//   title: "Please Wait",
-//   detail: "Waiting for new Tweets to be posted...",
-// };
-
-// const authMessage = {
-//   title: "Could not authenticate",
-//   details: [
-//     `Please make sure your bearer token is correct. 
-//       If using Glitch, remix this app and add it to the .env file`,
-//   ],
-//   type: "https://developer.twitter.com/en/docs/authentication",
-// };
 
 app.get("/api/tweets", async (req, res) => {
   try {
-    // const response = await get();
-
-    res.send({});
-  } catch (e) {
-    res.send(e);
-  }
-});
-
-app.post("/api/rules", async (req, res) => {
-  try {
-    const { keyword } = req.body;
-    startStream(keyword);
-    res.send({ success: true});
+    const { query } = req.query;
+    const response = await axios.get(`${recentURL}?query=${query}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    res.send(response.data);
   } catch (e) {
     res.send(e);
   }

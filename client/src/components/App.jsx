@@ -1,12 +1,12 @@
 import React from 'react';
-import Button from '../containers/Button';
+import SearchBox from '../containers/SearchBox';
 import Tweet from '../containers/Tweet'
 import Loading from '../containers/Loading'
 
 
 let App = () => (
   <div>
-    <Button />
+    <SearchBox />
     <Loading />
     <Tweet />
   </div>

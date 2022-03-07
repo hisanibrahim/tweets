@@ -4,7 +4,7 @@ import TweetList from '../containers/TweetList'
 import Loading from '../containers/Loading'
 
 
-let App = () => (
+const App = () => (
   <div>
     <SearchBox />
     <Loading />

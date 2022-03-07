@@ -6,7 +6,7 @@ import { Tweet } from "react-twitter-widgets";
 let TweetList = ({ tweets }) =>
   tweets
     ? tweets.map((tweet) => (
-        <div>
+        <div key={tweet.id}>
           <Tweet tweetId={tweet.id} />
         </div>
       ))

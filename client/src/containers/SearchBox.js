@@ -23,12 +23,11 @@ class SearchBox extends React.Component {
   render() {
     return (
       <div style={styles}>
-        <label for="search">Search for stuff</label>
+        <label>Search for stuff</label>
         <input
           id="search"
           type="search"
           placeholder="Search..."
-          autofocus
           required
           value={this.state.query}
           onChange={(event) => this.setState({ query: event.target.value })}

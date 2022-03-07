@@ -2,14 +2,14 @@ import { put, takeLatest, all } from "redux-saga/effects";
 
 const { REACT_APP_SERVER_URL } = process.env;
 
-function* fetchTweets() {
-  const json = yield fetch(REACT_APP_SERVER_URL).then((response) =>
-    response.json()
-  );
+function* fetchTweets(action) {
+  const json = yield fetch(
+    `${REACT_APP_SERVER_URL}?query=${action.query}`
+  ).then((response) => response.json());
 
   yield put({
     type: "TWEETS_RECEIVED",
-    json: json.articles || [{ error: json.message }],
+    json: json.data || [{ error: json.message }],
   });
 }
 

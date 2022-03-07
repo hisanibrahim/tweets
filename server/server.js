@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const http = require("http");
 const cors = require("cors");
 const axios = require("axios");
+const morgan = require("morgan");
 require("dotenv").config();
 
 const token = process.env.BEARER_TOKEN;
@@ -14,15 +15,19 @@ const port = process.env.PORT || 4000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
+app.use(morgan("dev"));
 
 const server = http.createServer(app);
 
 app.get("/api/tweets", async (req, res) => {
   try {
     const { query } = req.query;
-    const response = await axios.get(`${recentURL}?query=${query}`, {
+    const response = await axios.get(recentURL, {
       headers: {
         Authorization: `Bearer ${token}`,
+      },
+      params: {
+        query: query ? query : "world",
       },
     });
     res.send(response.data);

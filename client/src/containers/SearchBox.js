@@ -13,11 +13,11 @@ const styles = {
 class SearchBox extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { hover: false };
+    this.state = { query: "" };
   }
 
-  submit(event) {
-    this.props.getTweets();
+  submit() {
+    this.props.getTweets(this.state.query);
   }
 
   render() {
@@ -30,6 +30,8 @@ class SearchBox extends React.Component {
           placeholder="Search..."
           autofocus
           required
+          value={this.state.query}
+          onChange={(event) => this.setState({ query: event.target.value })}
         />
         <button
           type="button"
@@ -39,7 +41,7 @@ class SearchBox extends React.Component {
           onMouseOver={() => {
             this.setState({ hover: true });
           }}
-          onClick={this.props.getTweets}
+          onClick={this.submit()}
         >
           Go
         </button>

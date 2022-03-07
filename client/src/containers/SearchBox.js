@@ -3,13 +3,6 @@ import { connect } from "react-redux";
 import { getTweets } from "../actions";
 import "./SearchBox.css";
 
-const styles = {
-  position: "relative",
-  width: "30rem",
-  background: "#1da1f2",
-  borderRadius: "0.7rem",
-};
-
 class SearchBox extends React.Component {
   constructor(props) {
     super(props);
@@ -25,7 +18,7 @@ class SearchBox extends React.Component {
     return (
       <>
         <div className="topnav">
-          <a className="active" href="#home">
+          <a className="active">
             <i className="fa fa-twitter"></i>
           </a>
           <div className="search-container">

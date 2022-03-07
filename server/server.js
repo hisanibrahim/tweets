@@ -32,6 +32,7 @@ app.get("/api/tweets", async (req, res) => {
       },
       params: {
         query: query ? query : "world",
+        max_results: 25,
       },
     });
     res.send(response.data);

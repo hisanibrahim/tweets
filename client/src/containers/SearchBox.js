@@ -14,6 +14,7 @@ class SearchBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = { query: "" };
+    this.submit = this.submit.bind(this);
   }
 
   submit() {
@@ -22,29 +23,28 @@ class SearchBox extends React.Component {
 
   render() {
     return (
-      <div style={styles}>
-        <label>Search for stuff</label>
-        <input
-          id="search"
-          type="search"
-          placeholder="Search..."
-          required
-          value={this.state.query}
-          onChange={(event) => this.setState({ query: event.target.value })}
-        />
-        <button
-          type="button"
-          onMouseOut={() => {
-            this.setState({ hover: false });
-          }}
-          onMouseOver={() => {
-            this.setState({ hover: true });
-          }}
-          onClick={this.submit()}
-        >
-          Go
-        </button>
-      </div>
+      <>
+        <div className="topnav">
+          <a className="active" href="#home">
+            <i className="fa fa-twitter"></i>
+          </a>
+          <div className="search-container">
+            <div>
+              <input
+                type="text"
+                placeholder="Search.."
+                name="search"
+                value={this.state.query}
+                onChange={(e) => this.setState({ query: e.target.value })}
+              />
+              <button type="button" onClick={this.submit}>
+                <i className="fa fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="main"></div>
+      </>
     );
   }
 }

@@ -1,0 +1,21 @@
+{
+  "name": "tweets",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "heroku-postbuild": "cd client && npm install && npm run build && mv build ../server/client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hisanibrahim/tweets.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hisanibrahim/tweets/issues"
+  },
+  "homepage": "https://github.com/hisanibrahim/tweets#readme"
+}

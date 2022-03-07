@@ -5,7 +5,9 @@ const cors = require("cors");
 const axios = require("axios");
 const morgan = require("morgan");
 const path = require("path");
-require("dotenv").config();
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
 
 const token = process.env.BEARER_TOKEN;
 const recentURL = "https://api.twitter.com/2/tweets/search/recent";
@@ -17,6 +19,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(morgan("dev"));
+app.use(express.static(path.resolve(__dirname, "./client")));
 
 const server = http.createServer(app);
 
@@ -36,7 +39,5 @@ app.get("/api/tweets", async (req, res) => {
     res.send(e);
   }
 });
-
-app.use(express.static(path.resolve(__dirname, "./client")));
 
 server.listen(port, () => console.log(`Listening on port ${port}`));

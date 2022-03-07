@@ -18,9 +18,12 @@ class SearchBox extends React.Component {
     return (
       <>
         <div className="topnav">
-          <a className="active">
+          <a href="#" className="active">
             <i className="fa fa-twitter"></i>
           </a>
+          {this.props.tweets ? (
+            <a href="#">{this.props.tweets.length}</a>
+          ) : null}
           <div className="search-container">
             <div>
               <input
@@ -36,7 +39,6 @@ class SearchBox extends React.Component {
             </div>
           </div>
         </div>
-        <div className="main"></div>
       </>
     );
   }
@@ -45,7 +47,10 @@ class SearchBox extends React.Component {
 const mapDispatchToProps = {
   getTweets: getTweets,
 };
+const mapStateToProps = (state) => ({
+  tweets: state.tweets,
+});
 
-SearchBox = connect(null, mapDispatchToProps)(SearchBox);
+SearchBox = connect(mapStateToProps, mapDispatchToProps)(SearchBox);
 
 export default SearchBox;

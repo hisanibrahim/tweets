@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { TwitterTweetEmbed } from "react-twitter-embed";
 import { Tweet } from "react-twitter-widgets";
 import "./TweetList.css";
 let TweetList = ({ tweets }) => (

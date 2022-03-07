@@ -26,9 +26,6 @@ let Tweet = ({ article }) =>
             <h1>{article.title}</h1>
             <img style={imgStyle} src={article.urlToImage} alt="" />
             <h2>{article.description}</h2>
-            <a href={article.url} target="_blank">
-              READ MORE
-            </a>
           </div>
         )}
       </article>

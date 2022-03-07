@@ -4,6 +4,7 @@ const http = require("http");
 const cors = require("cors");
 const axios = require("axios");
 const morgan = require("morgan");
+const path = require("path");
 require("dotenv").config();
 
 const token = process.env.BEARER_TOKEN;
@@ -35,5 +36,7 @@ app.get("/api/tweets", async (req, res) => {
     res.send(e);
   }
 });
+
+app.use(express.static(path.resolve(__dirname, "./client")));
 
 server.listen(port, () => console.log(`Listening on port ${port}`));
